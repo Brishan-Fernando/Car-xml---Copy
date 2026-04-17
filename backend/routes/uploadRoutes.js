@@ -35,6 +35,23 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+router.get("/file/:type/:filename", (req, res) => {
+  const { type, filename } = req.params;
+  const baseDir = type === "xml" ? xmlUploadDir : type === "pdf" ? pdfUploadDir : null;
+
+  if (!baseDir) {
+    return res.status(400).json({ error: "Invalid file type" });
+  }
+
+  const filePath = path.join(baseDir, path.basename(filename));
+
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: "File not found" });
+  }
+
+  return res.sendFile(filePath);
+});
+
 // 🚀 MAIN ROUTE
 router.post(
   "/files",
@@ -53,8 +70,8 @@ router.post(
 
       const xmlPath = req.files.xml[0].path;
       const pdfPath = req.files.pdf[0].path;
-      const xmlPublicPath = `/uploads/xml/${path.basename(xmlPath)}`;
-      const pdfPublicPath = `/uploads/pdf/${path.basename(pdfPath)}`;
+      const xmlPublicPath = `/api/upload/file/xml/${path.basename(xmlPath)}`;
+      const pdfPublicPath = `/api/upload/file/pdf/${path.basename(pdfPath)}`;
 
       console.log("XML uploaded:", xmlPath);
       console.log("PDF uploaded:", pdfPath);
