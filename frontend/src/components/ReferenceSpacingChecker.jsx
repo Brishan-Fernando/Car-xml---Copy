@@ -12,7 +12,7 @@ function checkReferenceText(rawText) {
   const noUrls = text.replace(/https?:\/\/[^\s]+/g, "URL").replace(/doi\.org\/[^\s]+/gi, "URL");
 
   // 1. Double spaces
-  if (/  /.test(text)) {
+  if (/ {2}/.test(text)) {
     const count = (text.match(/ {2,}/g) || []).length;
     issues.push({ type: "spacing", msg: `Double space (${count} occurrence${count > 1 ? "s" : ""})` });
   }
