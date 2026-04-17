@@ -16,15 +16,42 @@ const app = express();
 
 connectDB();
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+const allowedOrigins = new Set(
+  ["http://localhost:3000", process.env.FRONTEND_URL].filter(Boolean)
+);
+
+function isAllowedOrigin(origin) {
+  if (!origin) return true;
+  if (allowedOrigins.has(origin)) return true;
+
+  try {
+    const frontendUrl = process.env.FRONTEND_URL
+      ? new URL(process.env.FRONTEND_URL)
+      : null;
+    const requestUrl = new URL(origin);
+
+    if (
+      frontendUrl &&
+      frontendUrl.hostname.endsWith(".netlify.app") &&
+      requestUrl.protocol === frontendUrl.protocol
+    ) {
+      const siteName = frontendUrl.hostname.replace(".netlify.app", "");
+      return (
+        requestUrl.hostname === frontendUrl.hostname ||
+        requestUrl.hostname.endsWith(`--${siteName}.netlify.app`)
+      );
+    }
+  } catch (error) {
+    return false;
+  }
+
+  return false;
+}
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (isAllowedOrigin(origin)) {
         return callback(null, true);
       }
       return callback(new Error("Not allowed by CORS"));
@@ -42,12 +69,6 @@ app.use((req, res, next) => {
   if (noFrame) res.setHeader("X-Frame-Options", "DENY");
   next();
 });
-
-app.use(cors({
-  origin: ["http://localhost:3000", process.env.FRONTEND_URL],
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type", "Authorization", "x-gemini-key"],
-}));
 
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
