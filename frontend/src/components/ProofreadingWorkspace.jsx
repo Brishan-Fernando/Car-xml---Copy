@@ -8,7 +8,11 @@ import { xmlToHtml, xmlToPlain } from "../utils/xmlRichText";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 const API_BASE = API_BASE_URL;
-const SERVER_BASE = API_BASE.replace("/api", "");
+const SERVER_BASE = API_BASE.replace(/\/api$/, "");
+
+function joinUrl(base, nextPath) {
+  return `${String(base || "").replace(/\/+$/, "")}/${String(nextPath || "").replace(/^\/+/, "")}`;
+}
 const SECTIONS = [
   { key: "title",          label: "Title" },
   { key: "authors",        label: "Authors" },
@@ -89,14 +93,14 @@ function ProofreadingWorkspace({ data, onReset }) {
 
   const pdfUrl = useMemo(() => {
     const path = data?.files?.pdfPath;
-    return path ? `${SERVER_BASE}/${path}` : null;
+    return path ? joinUrl(SERVER_BASE, path) : null;
   }, [data]);
 
   // Fetch raw XML file text from server so we show the actual uploaded XML
   useEffect(() => {
     const path = data?.files?.xmlPath;
     if (!path) return;
-    fetch(`${SERVER_BASE}/${path}`)
+    fetch(joinUrl(SERVER_BASE, path))
       .then(r => r.text())
       .then(text => setRawXml(text))
       .catch(() => setRawXml("Could not load XML source."));
@@ -105,7 +109,7 @@ function ProofreadingWorkspace({ data, onReset }) {
   // Custom PDF.js viewer served from backend — avoids Chrome iframe #search= limitation
   const pdfViewerSrc = useMemo(() => {
     if (!pdfUrl) return null;
-    return `${SERVER_BASE}/pdf-viewer.html?file=${encodeURIComponent(pdfUrl)}`;
+    return `${joinUrl(SERVER_BASE, "/pdf-viewer.html")}?file=${encodeURIComponent(pdfUrl)}`;
   }, [pdfUrl]);
 
   // Send search term to the already-loaded viewer via postMessage (no reload needed)
