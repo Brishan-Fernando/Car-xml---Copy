@@ -14,6 +14,9 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 
+// Render sits behind a proxy, so Express must trust forwarded IP headers.
+app.set("trust proxy", 1);
+
 connectDB();
 
 const allowedOrigins = new Set(

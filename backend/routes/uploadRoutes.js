@@ -1,10 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
 
 const parseXML = require("../engines/xmlParserEngine");
 const parsePDF = require("../engines/pdfParserEngine");
 const compareXMLPDF = require("../engines/comparisonEngine");
+
+const uploadsRoot = path.join(__dirname, "..", "uploads");
+const xmlUploadDir = path.join(uploadsRoot, "xml");
+const pdfUploadDir = path.join(uploadsRoot, "pdf");
+
+[uploadsRoot, xmlUploadDir, pdfUploadDir].forEach((dir) => {
+  fs.mkdirSync(dir, { recursive: true });
+});
 
 // 📁 STORAGE CONFIG
 const storage = multer.diskStorage({
@@ -13,9 +23,9 @@ const storage = multer.diskStorage({
       file.mimetype === "application/xml" ||
       file.originalname.endsWith(".xml")
     ) {
-      cb(null, "uploads/xml");
+      cb(null, xmlUploadDir);
     } else {
-      cb(null, "uploads/pdf");
+      cb(null, pdfUploadDir);
     }
   },
   filename: function (req, file, cb) {
@@ -80,7 +90,9 @@ router.post(
     }
   }
 );
+
 router.get("/test", (req, res) => {
   res.json({ message: "Upload API working" });
 });
+
 module.exports = router;

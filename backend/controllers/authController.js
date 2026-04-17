@@ -15,6 +15,11 @@ function validatePassword(password) {
   return null; // valid
 }
 
+function hasValidJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  return secret && !secret.includes("your_strong_secret");
+}
+
 async function register(req, res) {
   const { name, email, password } = req.body;
 
@@ -24,6 +29,10 @@ async function register(req, res) {
 
   const pwError = validatePassword(password);
   if (pwError) return res.status(400).json({ error: pwError });
+
+  if (!hasValidJwtSecret()) {
+    return res.status(500).json({ error: "JWT_SECRET is not configured on the server" });
+  }
 
   try {
     const existing = await User.findOne({ email });
@@ -40,6 +49,7 @@ async function register(req, res) {
 
     res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (err) {
+    console.error("Registration error:", err.message);
     res.status(500).json({ error: "Server error during registration" });
   }
 }
@@ -49,6 +59,10 @@ async function login(req, res) {
 
   if (!email || !password) {
     return res.status(400).json({ error: "Email and password are required" });
+  }
+
+  if (!hasValidJwtSecret()) {
+    return res.status(500).json({ error: "JWT_SECRET is not configured on the server" });
   }
 
   try {
@@ -66,6 +80,7 @@ async function login(req, res) {
 
     res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
   } catch (err) {
+    console.error("Login error:", err.message);
     res.status(500).json({ error: "Server error during login" });
   }
 }
