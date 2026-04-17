@@ -80,5 +80,7 @@ router.post(
     }
   }
 );
-
+router.get("/test", (req, res) => {
+  res.json({ message: "Upload API working" });
+});
 module.exports = router;
