@@ -1,0 +1,319 @@
+DOCUMENT LANGUAGES
+Roman = languages typeable with a QWERTY keyboard.
+Non-Roman = languages that cannot be typed with QWERTY (e.g. Cyrillic, Arabic, Chinese).
+Citations can be in English, Non-English, or multiple languages.
+
+---
+
+CITATION TITLE
+Element: citation-title, titletext
+Rules:
+Capture ALL titles regardless of language or alphabet type.
+Add 3-letter language code for non-English titles. English is identified automatically.
+Do NOT process a citation if the title is ONLY in Non-Roman. An English title is mandatory.
+If title contains unextractable characters, use Focus Editor, or replace with (Greek text) in HTML preview.
+If title contains a complex equation that cannot be expressed in one line, replace with (Formula presented).
+If English title has a subtitle, capitalize first character of subtitle. Add colon between main and subtitle if no other punctuation exists.
+Capitalize only the first letter of the first word. Rest are lowercase EXCEPT: all nouns in German titles, proper nouns, acronyms (GUI, NASA), parts of abbreviations or formulas.
+
+---
+
+AUTHORS
+Elements: ce:surname, ce:given-name, ce:alt-name, ce:alias, ce:initials, ce:degrees.
+Author names appear on first page or at end of citation.
+For Non-Roman citations, do NOT capture authors if they appear only in Non-Roman. Both versions must be present.
+Capture authors in original sequence order. For columns/rows: left to right, first row first. Verify via TOC or crossref.org.
+If author is listed as Anonymous, Anon, Anonymous1, or Anonimo, capture exactly as found and style as surname.
+
+Initials:
+Style as author initials in RED.
+Retain hyphens in initials.
+Multiple initials: no spaces between period and next initial.
+
+Degrees / Honorifics / Suffixes:
+Capture only when they appear in the author name.
+Pope = honorific. Lord = similar title.
+Professor = Prof. / Doctor = Dr. / Reverend = Rev. / Honorable = Hon. / Ph.D. = Ph.D. / BS = BS / MBA = MBA / LLD. = LLD.
+Junior = Jr. / Senior = Sr. / Roman numerals remain unchanged.
+Adjunct, Associate, Assistant, Visiting Professor are all treated as author degrees.
+
+Surnames:
+Capitalize first letter of each surname.
+Latin names (Brazil/Portugal/Spain): first name = given name, remaining = surname(s).
+Non-Latin names with 3+ parts: last name = surname, rest = given names.
+All-caps portion of a name = surname.
+Chinese/Vietnamese/Korean: hyphenated two-syllable name = given name. Two or three one-syllable names without hyphen: first = surname, others = given names.
+Hungarian: check footnotes/TOC/references for order.
+Prefixes meaning "written by" (von, van, par) are ignored.
+Prefixes that are part of surname (van, von, de, da, la, della, der, du, des, de la, van der) are kept with surname.
+
+Given Names:
+Retain hyphens.
+If abbreviated and full name not found, capture as it appears.
+
+Alternate Names:
+Non-Roman author names are captured as alternate names.
+English version must also be present.
+
+Author Alias:
+Aliases in parentheses or quotation marks are captured without the parentheses or quotes.
+Example: Christopher (Xiang) Lee → alias is Xiang.
+
+Email Address:
+No period or angle brackets.
+If multiple emails, capture first or most relevant only.
+One @ symbol per address.
+
+---
+
+COLLABORATION
+Collaboration names include: collaboration(s), work group(s), consortium, committee(s), study group(s), task force(s), registry.
+If both authors and collaborations exist: use author for individuals, collaboration for group name.
+If collaboration has a writing committee: writing committee members = authors, group name = collaboration. Non-writing members are not captured.
+If a name appears in more than one committee, capture it only once.
+Collaborations always receive the LAST sequence number regardless of position in citation. Example: 263 people + 1 collaboration = collaboration gets seq 264.
+
+---
+
+AFFILIATION
+Element: affiliation, organization, address-part, postal-code, city, state
+Do NOT capture CV, resume, footnotes about previous affiliations, or society memberships.
+Do NOT capture current, present, or former addresses different from original affiliation.
+Do NOT use correspondence person affiliation to complete author affiliation.
+If affiliation info is limited (only city or country), capture all available.
+
+Organization:
+Capture all organization names available in the affiliation.
+Key institution terms: "Department", "Departamento", "Abteilung", "Département", "Dipartimento",
+  "College", "Colegio", "Facultad", "Hochschule", "Collège", "Faculty", "Faculté",
+  "Faculdade", "Colégio", "Collegio", "Facoltà", "Institute", "Instituto",
+  "Institut", "Istituto", "University", "Universitas", "Universidad", "Universität",
+  "Université", "Universidade", "Università", "School", "Escuela", "Schule",
+  "École", "Escola", "Scuola", "Office", "Oficina", "Büro", "Bureau",
+  "Escritório", "Ufficio", "Center", "Centro", "Zentrum", "Centre",
+  "Laboratory", "Laboratorio", "Labor", "Laboratoire", "Laboratório",
+  "Group", "Grupo", "Gruppe", "Groupe", "Gruppo", "Division", "División",
+  "Divisão", "Divisione", "Inc", "S.A.", "S.A.E.", "GmbH", "AG", "SARL",
+  "Ltda.", "S.p.A.", "S.r.l.", "LLC", "S.R.L.", "Lda.", "Co. Ltd", "de C.V.",
+  "S.A.R.L.", "Company", "Compañía", "Empresa", "Unternehmen", "Firma",
+  "Société", "Entreprise", "Companhia", "Azienda", "Società", "Hospital",
+  "Krankenhaus", "Hôpital", "Ospedale", "Unit", "Unidad", "Einheit", "Unité",
+  "Unidade", "Unità", "Fund", "Fondo", "Fonds", "Fundo", "Academy", "Academia",
+  "Akademie", "Académie", "Accademia", "council", "consejo", "conseil",
+  "conselho", "consiglio", "Commission", "Comisión", "Kommission", "Comissão",
+  "Commissione", "Ministry", "ministerio", "Ministerium", "ministère",
+  "ministero", "ministerium", "branch", "branche", "Program", "Programa",
+  "Programm", "Programme", "Programma", "Association", "Asociación",
+  "Vereinigung", "Associação", "Associazione", "Administration",
+  "Administración", "Verwaltung", "Administração", "Amministrazione"
+
+Address:
+Capture: street names, location numbers, PO Box, building/apartment/office names, sub-sections of a city, neighborhood, regional names, district info.
+If too long: remove conjunctions/prepositions, abbreviate words, delete room numbers, delete PO Box if street name also present.
+
+State:
+Capture province/state only for Australia, Canada, and USA.
+Use standard abbreviations.
+
+Country:
+Taiwan / Republic of China = TWN.
+No country code for Crimea if none given in source.
+No code for Palestine or Israel if no country name given.
+Macau = MAC, Hong Kong = HKG.
+If no country in affiliation, try other affiliations or internet search to determine country.
+
+Affiliation Text:
+If multiple affiliations with no indicator of which belongs to which author, capture as Note Text.
+Capturing both affiliation and note text is NOT allowed in CAR XML.
+
+---
+
+MATCHING AUTHORS AND AFFILIATIONS
+1 author, 0 affiliations = no action needed.
+1 author, 1 affiliation, no indicator = match affiliation to author.
+1 author, multiple affiliations, no indicator = match ALL affiliations to that author.
+Multiple authors, 0 affiliations = no action needed.
+Multiple authors, 1 affiliation, no indicator = match affiliation to ALL authors.
+Multiple authors, multiple affiliations, indicators present = match by indicators.
+Multiple authors, multiple affiliations, no indicators = capture affiliations as note text using Y key.
+Multiple authors, multiple affiliations, indicators only for some = match those with indicators, ignore rest.
+
+---
+
+CORRESPONDENCE PERSON
+Element: correspondence, person, ce:e-address, affiliation, organization, address-part, postal-code, city, state
+Indicators in source: "Corresponding author:", "Reprint request to:", "All correspondence to:", "Contact address:", envelope symbol, or asterisk next to author name.
+Location: beginning of citation, after references, or at end.
+
+Rules:
+Single person or address given = capture it.
+No address or email given = do NOT capture correspondence person.
+Multiple addresses, no indication, but footnote has correspondence address = capture footnote address.
+One author asterisked, no note = capture that name and address.
+Two authors asterisked, one address = capture both names in separate correspondence elements with that address.
+Two authors asterisked, each with different address = capture both in separate correspondence elements.
+Footnote has name and address not one of the authors = capture it but do NOT add to author-group.
+Author has past and present address = capture present (current) address only.
+Correspondence person has two or more addresses = capture in one correspondence element for first address only.
+Correspondence address has no person name = match to author whose address matches, or use first author.
+
+---
+
+ABSTRACT
+Element: abstracts, publishercopyright, ce:para.
+Capture only English abstracts unless instructed otherwise.
+May appear at beginning or end of citation.
+If multiple paragraphs, capture all as one.
+Do NOT capture the heading Abstract / Summary / Synopsis / Conclusions with the abstract text.
+Replace complex equations with (Formula presented).
+Replace figures with (Figure presented).
+Replace tables with (Table presented).
+Do NOT capture journal information that appears alongside abstract text.
+Valid headings: Abstract, Summary, Synopsis, Conclusions, or any synonym.
+
+---
+
+KEYWORDS
+Element: author-keywords, author-keyword.
+Capture only English keywords unless instructed otherwise.
+Do NOT capture the heading Keyword or Key words.
+If multiple keywords, capture each separately.
+Capitalize first letter of first word only. Exception: names or formula compounds that normally start with lowercase (e.g. cDNA) stay lowercase.
+
+---
+
+DOI
+Capture in lowercase letters only.
+Do NOT capture the prefix DOI if present.
+Use only alpha, numeric, and standard keyboard characters.
+Replace em-dash with regular dash.
+If multiple DOIs present, capture only the relevant one.
+
+---
+
+PII
+Capture when present. Must contain at least 9 characters.
+Do NOT capture brackets, parentheses, or hyphens.
+
+---
+
+ORCID
+Match to relevant author using match widget.
+Do NOT capture the text ORCID, capture the number only.
+
+---
+
+ARTICLE NUMBER
+Used by some publishers instead of page numbers.
+Assigned by publisher, typically in electronic documents.
+Location varies per publisher.
+
+---
+
+PAGE NUMBERS
+Single page citation = capture in first-page element.
+Split page range (e.g. 1-9 and 45-47) = capture entire range in pages-text element.
+Shortened page numbers (e.g. 318-20) = expand to full: 318 as first page, 320 as last page.
+Page numbers with letters (e.g. A101-12) = expand: A101 as first page, A112 as last page.
+Do NOT convert Roman numerals to Arabic numerals.
+Do NOT capture parentheses around page numbers.
+If page numbering starts on second page, calculate the first page.
+If page range includes blank pages, capture as indicated including blanks.
+
+---
+
+COPYRIGHT
+Element: publishercopyright.
+Capture if available within the citation.
+English abstract must be present to capture copyright. Copyright must be in English.
+For APS, PLoS, and SPIE sources: capture the ENTIRE copyright statement including Creative Commons text and URL.
+
+---
+
+GRANTS
+Element: grantlist, grant-id, grant-agency, grant-text.
+Capture monetary support information only.
+Do NOT capture non-monetary support (administrative, editorial, technical) in grant elements other than grant-text.
+Do NOT capture programs, scholarships, internships, consultancy fees, or honorariums in grant elements other than grant-text.
+Capture grant-text for all support written in Roman alphabet language.
+Set language code if grants language is Non-English.
+Capture ALL text in Acknowledgement sections in grant.
+Do NOT capture the section heading itself as grant.
+
+Grants info can be found in: Acknowledgements, Funding, first page below abstract, near TOC, footnote, beginning or end of published item, end of Conclusion section, near references.
+
+Section headings that indicate grant content: Acknowledgements, Conclusion, Funding, Funding Statement, Financial Disclosure, Financial Support, Grants, Grant Information, Potential conflicts of interest, Source of funding, Sponsors, Sponsorships, Sponsoring Organizations.
+
+Grant Organization: Capture all funding organization names found in grants text.
+Grant ID: Capture grant ID numbers if available in grants text.
+
+---
+
+REFERENCES
+Element: reference, ref-info, ref-fulltext, ce:source-text.
+Required for articles published from 1970 to current year.
+If both Reference section and Footnote references exist, capture Reference section only.
+If ONLY footnote references exist, capture those.
+Do NOT capture references found entirely within body text.
+Do NOT capture references available ONLY in Non-Roman script.
+
+Reference types:
+Incomplete references = capture as found, do not search to complete them. References containing only ibid, supra, op. cit., or loc. cit. are NOT captured.
+Multiple references within one reference = separate and capture each individually.
+Secondary references (original and translated version both mentioned) = capture each separately.
+Stealth references (see, see also, Cf.) = if author, title, and publication info are present, capture separately.
+Double references (Roman and Non-Roman versions) = merge both in ref-fulltext and ce:source-text before delivering XML. Correct sequence numbers.
+
+Reference Source Title:
+Usually the second title. Appears in italics.
+If only one title exists, capture as source title.
+
+Publication Year:
+Expand 2-digit years to 4 digits.
+Year ranges captured as-is (e.g. 2002-2003).
+If year contains a letter, capture without the letter.
+If republished, use latest year as first value, capture other years in ref-text.
+
+Volume:
+Use vol-first and vol-last for numeric volumes.
+Use vol-text when volume contains letters or text (e.g. Vol. B1, January, Winter).
+
+Issue:
+Use iss-first and iss-last for numeric issues.
+Use iss-text for text issues (e.g. Spring, July/August, Special Issue).
+Special issues with long subtitles go in ref-text only.
+
+Parts and Supplements:
+pt. II = Part II / part 3 = Part 3 / Sup. No. 5 = Supplement 5 / Suppl. = Supplement / sup = Supplement.
+
+Reference Text:
+Capture info that does not fit other elements.
+Do NOT capture: price, illustration count, n.p., n.d., single parentheses without a mate (replace with comma), angle brackets, "See my", placement words such as Appears in / In / Available at.
+Maximum string without spaces: 50 characters.
+
+Reference Identifiers:
+ABSTRACTNUMBER = Abstract Number
+ARTNUM = Article Number
+ARXIV = ARXIV Archive Server Article ID
+CODENCODE = Coden Code
+FRAGMENTID = Original ID of referenced citation
+ISBN = International Standard Book Number
+ISSN = International Standard Serial Number
+OSIN = Originating Source Identification Number
+PATN = Patent Number
+REPN = Report Number
+Include descriptor text in ref-text if needed (e.g. CS Patent, EP Patent, Legal Report).
+
+Reference Website:
+Capture URL where referenced document is published.
+Do NOT capture angle brackets around URL.
+
+Reference Website Name:
+Capture name of website as it appears in citation.
+Do not confuse URL with website name.
+
+Reference Full Text:
+Capture the complete reference.
+
+Reference Source Text:
+Capture reference information exactly as found in source, in plain text.

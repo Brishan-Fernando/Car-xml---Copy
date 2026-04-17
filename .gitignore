@@ -1,0 +1,25 @@
+# Environment variables — NEVER commit these
+backend/.env
+.env
+
+# Dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/build/
+
+# Uploaded files (can be large)
+backend/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Superpowers brainstorm sessions
+.superpowers/
