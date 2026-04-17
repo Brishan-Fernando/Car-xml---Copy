@@ -1,11 +1,10 @@
-import React, { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import "../WorkspaceTheme.css";
 import ErrorPanel from "./ErrorPanel";
 import AIChat from "./AIChat";
 import AbstractDiffView from "./AbstractDiffView";
 import ReferenceSpacingChecker from "./ReferenceSpacingChecker";
 import { xmlToHtml, xmlToPlain } from "../utils/xmlRichText";
-import React, { useMemo, useCallback } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 const SECTIONS = [
   { key: "title",          label: "Title" },
