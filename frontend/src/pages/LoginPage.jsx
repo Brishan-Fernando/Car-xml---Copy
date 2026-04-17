@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import API from "../services/api";
 import "../WorkspaceTheme.css";
 
 function LoginPage() {
@@ -15,24 +16,13 @@ function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Login failed");
-        return;
-      }
+      const { data } = await API.post("/auth/login", { email, password });
 
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/");
-    } catch {
-      setError("Unable to connect to server. Make sure the backend is running.");
+    } catch (error) {
+      setError(error.response?.data?.error || "Unable to connect to server. Make sure the backend is running.");
     } finally {
       setLoading(false);
     }

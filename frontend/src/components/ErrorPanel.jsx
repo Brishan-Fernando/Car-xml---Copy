@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API from "../services/api";
 import "../WorkspaceTheme.css";
 
 function ErrorPanel({ comparison = [], xml, pdf, onJump }) {
@@ -17,13 +18,9 @@ function ErrorPanel({ comparison = [], xml, pdf, onJump }) {
     const apiKey = sessionStorage.getItem("car_gemini_apikey") || "";
 
     try {
-      const res = await fetch("http://localhost:5000/api/ai/explain-issue", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(apiKey && { "x-gemini-key": apiKey }),
-        },
-        body: JSON.stringify({
+      const { data } = await API.post(
+        "/ai/explain-issue",
+        {
           comparisonItem: item,
           xmlTitle: xml?.title || "",
           pdfTitle: pdf?.title || "",
@@ -31,9 +28,14 @@ function ErrorPanel({ comparison = [], xml, pdf, onJump }) {
           pdfAbstract: pdf?.abstract || "",
           xmlReferenceCount: xml?.references?.length || 0,
           pdfReferenceCount: pdf?.references?.length || 0,
-        }),
-      });
-      const data = await res.json();
+        },
+        {
+        headers: {
+          ...(apiKey && { "x-gemini-key": apiKey }),
+        },
+        }
+      );
+
       setAiExplanations((prev) => ({
         ...prev,
         [index]: data.explanation || data.error || "No explanation returned.",

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import API from "../services/api";
 
 const styles = {
   wrapper: {
@@ -137,14 +138,7 @@ function FileUploadComponent({ setResults }) {
     formData.append("pdf", pdfFile);
 
     try {
-      const response = await fetch("http://localhost:5000/api/upload/files", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error(`Server error: ${response.status}`);
-
-      const data = await response.json();
+      const { data } = await API.post("/upload/files", formData);
       if (setResults) setResults(data);
       // Note: never log 'data' here — it contains parsed file contents
     } catch (error) {

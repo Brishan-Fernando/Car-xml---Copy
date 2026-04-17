@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import API from "../services/api";
 import "../WorkspaceTheme.css";
 
 // ── Password strength scorer (mirrors backend rules) ────────────────────────
@@ -107,16 +108,10 @@ function RegisterPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error || "Registration failed"); return; }
+      await API.post("/auth/register", { name, email, password });
       navigate("/login");
-    } catch {
-      setError("Unable to connect to server. Make sure the backend is running.");
+    } catch (error) {
+      setError(error.response?.data?.error || "Unable to connect to server. Make sure the backend is running.");
     } finally {
       setLoading(false);
     }

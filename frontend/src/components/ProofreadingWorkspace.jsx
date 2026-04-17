@@ -3,10 +3,11 @@ import ErrorPanel from "./ErrorPanel";
 import AIChat from "./AIChat";
 import AbstractDiffView from "./AbstractDiffView";
 import ReferenceSpacingChecker from "./ReferenceSpacingChecker";
+import { API_BASE_URL } from "../services/api";
 import { xmlToHtml, xmlToPlain } from "../utils/xmlRichText";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
-const API_BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE = API_BASE_URL;
 const SERVER_BASE = API_BASE.replace("/api", "");
 const SECTIONS = [
   { key: "title",          label: "Title" },

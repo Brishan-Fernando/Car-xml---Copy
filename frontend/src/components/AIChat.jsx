@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import API from "../services/api";
 import "../WorkspaceTheme.css";
 
 function AIChat() {
@@ -16,16 +17,17 @@ function AIChat() {
     const apiKey = sessionStorage.getItem("car_gemini_apikey") || "";
 
     try {
-      const res = await fetch("http://localhost:5000/api/ai/ask", {
-        method: "POST",
+      const { data } = await API.post(
+        "/ai/ask",
+        { question },
+        {
         headers: {
-          "Content-Type": "application/json",
           // Only attach header when key exists — backend falls back to env var otherwise
           ...(apiKey && { "x-gemini-key": apiKey }),
         },
-        body: JSON.stringify({ question }),
-      });
-      const data = await res.json();
+        }
+      );
+
       if (data.error) {
         setAnswer(`⚠ ${data.error}`);
       } else {
