@@ -43,6 +43,12 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cors({
+  origin: ["http://localhost:3000", process.env.FRONTEND_URL],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-gemini-key"],
+}));
+
 app.use(express.json({ limit: "10mb" }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "public")));
