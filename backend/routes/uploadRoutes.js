@@ -53,6 +53,8 @@ router.post(
 
       const xmlPath = req.files.xml[0].path;
       const pdfPath = req.files.pdf[0].path;
+      const xmlPublicPath = `/uploads/xml/${path.basename(xmlPath)}`;
+      const pdfPublicPath = `/uploads/pdf/${path.basename(pdfPath)}`;
 
       console.log("XML uploaded:", xmlPath);
       console.log("PDF uploaded:", pdfPath);
@@ -73,8 +75,8 @@ router.post(
     pdf: pdfData,
     comparison: comparison,
     files: {
-      xmlPath: xmlPath.replace(/\\/g, "/"),
-      pdfPath: pdfPath.replace(/\\/g, "/")
+      xmlPath: xmlPublicPath,
+      pdfPath: pdfPublicPath
     }
   }
 });
