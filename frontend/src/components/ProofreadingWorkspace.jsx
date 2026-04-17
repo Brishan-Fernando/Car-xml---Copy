@@ -5,7 +5,7 @@ import AIChat from "./AIChat";
 import AbstractDiffView from "./AbstractDiffView";
 import ReferenceSpacingChecker from "./ReferenceSpacingChecker";
 import { xmlToHtml, xmlToPlain } from "../utils/xmlRichText";
-
+import React, { useMemo, useCallback } from "react";
 
 const SECTIONS = [
   { key: "title",          label: "Title" },
@@ -53,7 +53,9 @@ function ProofreadingWorkspace({ data, onReset }) {
 
   const xml        = data?.xml        || {};
   const pdf        = data?.pdf        || {};
-  const comparison = data?.comparison || [];
+  const comparison = useMemo(() => {
+  return data?.comparison || [];
+}, [data]);
 
   const sectionRefs = useRef({});
   SECTIONS.forEach(({ key }) => {
