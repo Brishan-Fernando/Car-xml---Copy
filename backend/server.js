@@ -82,11 +82,26 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/search", searchRoutes);
 
+// ── Serve React frontend build in production ──────────────────────────────
+// The built frontend lives in ../frontend/build (one level up from backend/)
+const frontendBuild = path.join(__dirname, "..", "frontend", "build");
+
+if (process.env.NODE_ENV === "production") {
+  // Serve static assets (JS, CSS, images)
+  app.use(express.static(frontendBuild));
+
+  // Catch-all: any route not matched by API routes returns index.html
+  // This allows React Router (/login, /register, etc.) to work correctly
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendBuild, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("CAR XML backend is running (development)");
+  });
+}
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-app.get("/", (req, res) => {
-  res.send("CAR XML backend is running");
 });

@@ -73,9 +73,6 @@ router.post(
       const xmlPublicPath = `/api/upload/file/xml/${path.basename(xmlPath)}`;
       const pdfPublicPath = `/api/upload/file/pdf/${path.basename(pdfPath)}`;
 
-      console.log("XML uploaded:", xmlPath);
-      console.log("PDF uploaded:", pdfPath);
-
       // 🧠 PARSE
       const xmlData = await parseXML(xmlPath);
       const pdfData = await parsePDF(pdfPath);

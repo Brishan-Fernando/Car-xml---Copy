@@ -7,8 +7,7 @@ import { API_BASE_URL } from "../services/api";
 import { xmlToHtml, xmlToPlain } from "../utils/xmlRichText";
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
-const API_BASE = API_BASE_URL;
-const SERVER_BASE = API_BASE.replace(/\/api$/, "");
+const SERVER_BASE = API_BASE_URL.replace(/\/api$/, "");
 
 function joinUrl(base, nextPath) {
   return `${String(base || "").replace(/\/+$/, "")}/${String(nextPath || "").replace(/^\/+/, "")}`;

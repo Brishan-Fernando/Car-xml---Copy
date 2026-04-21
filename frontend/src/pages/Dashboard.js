@@ -7,7 +7,6 @@ function Dashboard() {
   const [results, setResults] = useState(null);
 
   const handleUploadResult = (data) => {
-    console.log("Data received in Dashboard:", data);
     setResults(data);
   };
 
@@ -22,7 +21,6 @@ function Dashboard() {
   return (
     <FileUploadComponent
       setResults={handleUploadResult}
-      onUploadResult={handleUploadResult}
     />
   );
 }
