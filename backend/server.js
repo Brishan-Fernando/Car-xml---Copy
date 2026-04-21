@@ -92,7 +92,7 @@ if (process.env.NODE_ENV === "production") {
 
   // Catch-all: any route not matched by API routes returns index.html
   // This allows React Router (/login, /register, etc.) to work correctly
-  app.get("*", (req, res) => {
+  app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(frontendBuild, "index.html"));
   });
 } else {
