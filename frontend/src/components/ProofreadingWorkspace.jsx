@@ -95,7 +95,7 @@ function ProofreadingWorkspace({ data, onReset }) {
     return path ? joinUrl(SERVER_BASE, path) : null;
   }, [data]);
 
-  // Fetch raw XML file text from server so we show the actual uploaded XML
+  // Fetch raw XML file text from server 
   useEffect(() => {
     const path = data?.files?.xmlPath;
     if (!path) return;
@@ -105,7 +105,7 @@ function ProofreadingWorkspace({ data, onReset }) {
       .catch(() => setRawXml("Could not load XML source."));
   }, [data?.files?.xmlPath]);
 
-  // Custom PDF.js viewer served from backend — avoids Chrome iframe #search= limitation
+  // Custom PDF.js viewer served from backend 
   const pdfViewerSrc = useMemo(() => {
     if (!pdfUrl) return null;
     return `${joinUrl(SERVER_BASE, "/pdf-viewer.html")}?file=${encodeURIComponent(pdfUrl)}`;
@@ -696,36 +696,36 @@ function ProofreadingWorkspace({ data, onReset }) {
                           <span className="aff-num-badge">{num}</span>
                           <div style={{flex:1}}>
                             <div className="aff-tags">
-                              {/* Each chip searches in PDF on click; 🌐 icon opens Bing float */}
+                              {/* Each chip searches in PDF on click; 🌐 icon opens Google float */}
                               {orgs.map((org, j) => (
                                 <span key={j} style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                   <span className="aff-org aff-chip" onClick={() => searchInPdf(org)} title={`Find "${org}" in PDF`}>{org}</span>
-                                  <span onClick={() => showFloatSearch(org)} title={`Search "${org}" in Bing`} style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                  <span onClick={() => showFloatSearch(org)} title={`Search "${org}" in Google`} style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                                 </span>
                               ))}
                               {aff.address && (
                                 <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                   <span className="aff-address aff-chip" onClick={() => searchInPdf(aff.address)} title="Find address in PDF">{aff.address}</span>
-                                  <span onClick={() => showFloatSearch(aff.address)} title="Search address in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                  <span onClick={() => showFloatSearch(aff.address)} title="Search address in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                                 </span>
                               )}
                               {aff.city && (
                                 <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                   <span className="aff-city aff-chip" onClick={() => searchInPdf(aff.city)} title="Find city in PDF">{aff.city}</span>
-                                  <span onClick={() => showFloatSearch(aff.city)} title="Search city in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                  <span onClick={() => showFloatSearch(aff.city)} title="Search city in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                                 </span>
                               )}
                               {aff.state && (
                                 <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                   <span className="aff-state aff-chip" onClick={() => searchInPdf(aff.state)} title="Find state in PDF">{aff.state}</span>
-                                  <span onClick={() => showFloatSearch(aff.state)} title="Search state in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                  <span onClick={() => showFloatSearch(aff.state)} title="Search state in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                                 </span>
                               )}
                               {aff.postalCode && <span className="aff-postal aff-chip" onClick={() => searchInPdf(aff.postalCode)} title="Find postal code in PDF">{aff.postalCode}</span>}
                               {aff.country && (
                                 <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                   <span className="aff-country aff-chip" onClick={() => searchInPdf(aff.country)} title="Find country in PDF">{aff.country}</span>
-                                  <span onClick={() => showFloatSearch(aff.country)} title="Search country in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                  <span onClick={() => showFloatSearch(aff.country)} title="Search country in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                                 </span>
                               )}
                             </div>
@@ -746,8 +746,8 @@ function ProofreadingWorkspace({ data, onReset }) {
                           }
                           <button
                             className="aff-search-btn aff-web-btn"
-                            onClick={() => window.open(`https://www.bing.com/search?q=${encodeURIComponent(orgs.join(" "))}`, "_blank")}
-                            title="Verify on Bing (opens in Edge)"
+                            onClick={() => window.open(`https://www.google.com/search?q=${encodeURIComponent(orgs.join(" "))}`, "_blank")}
+                            title="Verify on Google"
                           >🌐 Verify on Web</button>
                         </div>
                       </div>

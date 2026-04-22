@@ -7,9 +7,6 @@ const { askAI, explainComparisonIssue } = require("../engines/aiEngine");
  * Extract and validate the Gemini API key from the request.
  * Priority: x-gemini-key header  →  GEMINI_API_KEY env var
  * Returns the key string, or null if neither is available.
- *
- * Note: Google periodically changes their API key format.
- * We only do a minimum-length sanity check — no prefix assumption.
  */
 function resolveApiKey(req) {
   const headerKey = (req.headers["x-gemini-key"] || "").trim();

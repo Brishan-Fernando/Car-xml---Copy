@@ -153,8 +153,7 @@ function getText(value) {
 }
 
 /**
- * Extract the iso-code attribute from a <country iso-code="USA"/> node.
- * The node looks like: { "iso-code": "USA" }  (no text content).
+ * Extract the iso-code attribute 
  */
 function getCountryCode(countryNode) {
   if (!countryNode || typeof countryNode !== "object") return "";
