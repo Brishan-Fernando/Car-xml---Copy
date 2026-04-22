@@ -787,32 +787,32 @@ function ProofreadingWorkspace({ data, onReset }) {
                             {(c.affiliation.organizations || []).map((org, j) => (
                               <span key={j} style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                 <span className="aff-org aff-chip" onClick={() => searchInPdf(org)} title="Find in PDF">{org}</span>
-                                <span onClick={() => showFloatSearch(org)} title="Search in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                <span onClick={() => showFloatSearch(org)} title="Search in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                               </span>
                             ))}
                             {c.affiliation.address && (
                               <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                 <span className="aff-address aff-chip" onClick={() => searchInPdf(c.affiliation.address)}>{c.affiliation.address}</span>
-                                <span onClick={() => showFloatSearch(c.affiliation.address)} title="Search in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                <span onClick={() => showFloatSearch(c.affiliation.address)} title="Search in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                               </span>
                             )}
                             {c.affiliation.city && (
                               <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                 <span className="aff-city aff-chip" onClick={() => searchInPdf(c.affiliation.city)}>{c.affiliation.city}</span>
-                                <span onClick={() => showFloatSearch(c.affiliation.city)} title="Search in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                <span onClick={() => showFloatSearch(c.affiliation.city)} title="Search in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                               </span>
                             )}
                             {c.affiliation.state && (
                               <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                 <span className="aff-state aff-chip" onClick={() => searchInPdf(c.affiliation.state)}>{c.affiliation.state}</span>
-                                <span onClick={() => showFloatSearch(c.affiliation.state)} title="Search in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                <span onClick={() => showFloatSearch(c.affiliation.state)} title="Search in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                               </span>
                             )}
                             {c.affiliation.postalCode && <span className="aff-postal aff-chip" onClick={() => searchInPdf(c.affiliation.postalCode)}>{c.affiliation.postalCode}</span>}
                             {c.affiliation.country && (
                               <span style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
                                 <span className="aff-country aff-chip" onClick={() => searchInPdf(c.affiliation.country)}>{c.affiliation.country}</span>
-                                <span onClick={() => showFloatSearch(c.affiliation.country)} title="Search in Bing" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
+                                <span onClick={() => showFloatSearch(c.affiliation.country)} title="Search in Google" style={{ cursor: "pointer", fontSize: 13, opacity: 0.6, userSelect: "none" }}>🌐</span>
                               </span>
                             )}
                           </div>
