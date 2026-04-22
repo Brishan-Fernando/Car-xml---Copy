@@ -7,7 +7,6 @@ const connectDB = require("./config/db");
 const uploadRoutes = require("./routes/uploadRoutes");
 const aiRoutes = require("./routes/aiRoutes");
 const authRoutes = require("./routes/authRoutes");
-const searchRoutes = require("./routes/searchRoutes");
 if (process.env.NODE_ENV !== "production") {
   require("./proxyServer");
 }
@@ -80,7 +79,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/auth", authRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/ai", aiRoutes);
-app.use("/api/search", searchRoutes);
 
 // ── Serve React frontend build in production ──────────────────────────────
 // The built frontend lives in ../frontend/build (one level up from backend/)
